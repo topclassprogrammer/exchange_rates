@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:18-bookworm
+    env_file:
+      - .env
+    ports:
+      - "5431:5432"
+
+  exchange:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    restart: always
