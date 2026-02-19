@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     parser = Parser()
     parser.add_argument("period")
-    args = parser.parser.parse_args()
+    args = parser.parse_arguments()
 
     load_dotenv()
     exchange = Exchange("https://v6.exchangerate-api.com/v6/", os.getenv("API_KEY"), "USD")
