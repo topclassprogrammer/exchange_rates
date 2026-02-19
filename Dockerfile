@@ -4,4 +4,4 @@ RUN pip install -r requirements.txt
 RUN mkdir app
 WORKDIR app
 COPY . .
-ENTRYPOINT ["python", "main.py", "2"]
+ENTRYPOINT ["python", "main.py", "60"]
