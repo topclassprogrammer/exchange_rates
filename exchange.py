@@ -6,7 +6,7 @@ from models import Request, Response, Session
 
 
 class Exchange:
-    def __init__(self, base_url, api_key, from_currency):
+    def __init__(self, base_url: str, api_key: str, from_currency: str):
         self.api_key = api_key
         self.base_url = base_url
         self.from_currency = from_currency
@@ -14,7 +14,7 @@ class Exchange:
 
     def get_exchange_rates(self):
         try:
-            response = requests.get(f"{self.base_url}/{self.api_key}/latest/{self.from_currency}", verify=False)
+            response = requests.get(f"{self.base_url}/{self.api_key}/latest/{self.from_currency}")
             if 200 <= response.status_code < 300:
                 logger.info(f"Connected to API: {response.url}")
                 response_json = response.json()
@@ -42,7 +42,7 @@ class Exchange:
             logger.info(f"Created row in {Request.__tablename__}")
             return request_obj.id
 
-    def save_exchange_rates(self, exchange_rates: dict, request_obj_id):
+    def save_exchange_rates(self, exchange_rates: dict, request_obj_id: int):
         with Session() as session:
             for key, value in exchange_rates.items():
                 response_obj = Response(into_currency=key, currency_value=value, request=request_obj_id)
